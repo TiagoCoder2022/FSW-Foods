@@ -4,6 +4,7 @@ import DiscountBadge from "@/app/_components/discount-badge";
 import ProductList from "@/app/_components/product-list";
 import { Button } from "@/app/_components/ui/button";
 import { Card } from "@/app/_components/ui/card";
+import DeliveryInfo from "@/app/_components/ui/delivery-info";
 import {
   calculateProductTotalPrice,
   formatCurrency,
@@ -98,34 +99,8 @@ const ProductDetails = ({
           </Button>
         </div>
       </div>
-
       <div className="px-5">
-        <Card className="mt-6 flex justify-around py-3">
-          <div className="flex flex-col items-center">
-            <div className="flex items-center gap-1 text-muted-foreground">
-              <BikeIcon size={14} />
-              <span className="text-xs">Entrega</span>
-            </div>
-
-            {Number(product.restaurant.deliveryFee) > 0 ? (
-              <p className="text-xs font-semibold">
-                {formatCurrency(Number(product.restaurant.deliveryFee))}
-              </p>
-            ) : (
-              <p className="text-xs font-semibold">Grátis</p>
-            )}
-          </div>
-
-          <div className="flex flex-col items-center">
-            <div className="flex items-center gap-1 text-muted-foreground">
-              <TimerIcon size={14} />
-              <span className="text-xs">Entrega</span>
-            </div>
-            <p className="text-xs font-semibold">
-              {product.restaurant.deliveryTimeMinutes} min
-            </p>
-          </div>
-        </Card>
+        <DeliveryInfo restaurant={product.restaurant} />
       </div>
 
       <div className="mt-6 space-y-3 px-5">
