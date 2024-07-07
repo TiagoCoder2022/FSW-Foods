@@ -3,6 +3,7 @@
 import { Prisma, Product } from "@prisma/client";
 import { Children, ReactNode, createContext, useMemo, useState } from "react";
 import { calculateProductTotalPrice } from "../_helpers/price";
+import { empty } from "@prisma/client/runtime/library";
 
 export interface CartProduct
   extends Prisma.ProductGetPayload<{
@@ -24,12 +25,21 @@ interface ICartContex {
   subtotalPrice: number;
   totalPrice: number;
   totalDiscounts: number;
-  totalPriceWithDeliveryFee: number;
   addProductToCart: ({
     product,
+    quantity,
     emptyCart,
   }: {
-    product: CartProduct;
+    product: Prisma.ProductGetPayload<{
+      include: {
+        restaurant: {
+          select: {
+            deliveryFee: true;
+          };
+        };
+      };
+    }>;
+    quantity: number;
     emptyCart?: boolean;
   }) => void;
   decreaseProductQuantity: (productId: string) => void;
@@ -42,7 +52,6 @@ export const CartContex = createContext<ICartContex>({
   subtotalPrice: 0,
   totalPrice: 0,
   totalDiscounts: 0,
-  totalPriceWithDeliveryFee: 0,
   addProductToCart: () => {},
   decreaseProductQuantity: () => {},
   increaseProductQuantity: () => {},
@@ -52,24 +61,22 @@ export const CartContex = createContext<ICartContex>({
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<CartProduct[]>([]);
 
-  const deliveryFee = products[0]?.restaurant?.deliveryFee;
-
   const subtotalPrice = useMemo(() => {
     return products.reduce((acc, product) => {
-      return acc + Number(product.price) * product.quantity;
+      return acc + Number(product?.price) * product.quantity;
     }, 0);
   }, [products]);
 
   const totalPrice = useMemo(() => {
-    return products.reduce((acc, product) => {
-      return acc + calculateProductTotalPrice(product) * product.quantity;
-    }, 0);
+    return (
+      products.reduce((acc, product) => {
+        return acc + calculateProductTotalPrice(product) * product?.quantity;
+      }, 0) + Number(products[0]?.restaurant?.deliveryFee)
+    );
   }, [products]);
 
-  const totalDiscounts = subtotalPrice - totalPrice;
-  const totalPriceWithDeliveryFee = totalPrice + Number(deliveryFee);
-
-  console.log(totalPriceWithDeliveryFee);
+  const totalDiscounts =
+    subtotalPrice - totalPrice + Number(products[0]?.restaurant?.deliveryFee);
 
   const decreaseProductQuantity = (productId: string) => {
     return setProducts((prev) =>
@@ -102,10 +109,28 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  const addProductToCart: ICartContex["addProductToCart"] = ({
+  const addProductToCart = ({
     product,
+    quantity,
     emptyCart,
+  }: {
+    product: Prisma.ProductGetPayload<{
+      include: {
+        restaurant: {
+          select: {
+            deliveryFee: true;
+          };
+        };
+      };
+    }>;
+    quantity: number;
+    emptyCart?: boolean;
   }) => {
+    if (emptyCart) {
+      setProducts([]);
+    }
+
+    //VERIFICA SE O PRODUTO JÁ ESTÁ NO CARRINHO
     const isProductAlreadyOnCart = products.some(
       (cartProduct) => cartProduct.id === product.id,
     );
@@ -117,7 +142,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           if (cartProduct.id === product.id) {
             return {
               ...cartProduct,
-              quantity: cartProduct.quantity + product.quantity,
+              quantity: cartProduct.quantity + quantity,
             };
           }
           return cartProduct;
@@ -125,7 +150,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       );
     }
     //SE NAO, ADICIONÁ-LO COM A QUANTIDADE RECEBIDA
-    setProducts((prev) => [...prev, product]);
+    setProducts((prev) => [...prev, { ...product, quantity: quantity }]);
   };
 
   const removeProductFromCart = (productId: string) => {
@@ -141,7 +166,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         subtotalPrice,
         totalPrice,
         totalDiscounts,
-        totalPriceWithDeliveryFee,
         addProductToCart,
         decreaseProductQuantity,
         increaseProductQuantity,
