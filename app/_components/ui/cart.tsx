@@ -6,7 +6,12 @@ import { formatCurrency } from "@/app/_helpers/price";
 import { Separator } from "./separator";
 import { Button } from "./button";
 
-const Cart = () => {
+interface CartProps {
+  // eslint-disable-next-line no-unused-vars
+  setIsOpen: (isOpen: boolean) => void;
+}
+
+const Cart = ({ setIsOpen }: CartProps) => {
   const { products, subtotalPrice, totalPrice, totalDiscounts } =
     useContext(CartContex);
 
