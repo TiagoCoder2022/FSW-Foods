@@ -46,6 +46,7 @@ interface ICartContex {
   decreaseProductQuantity: (productId: string) => void;
   increaseProductQuantity: (productId: string) => void;
   removeProductFromCart: (productId: string) => void;
+  clearCart: () => void;
 }
 
 export const CartContex = createContext<ICartContex>({
@@ -58,6 +59,7 @@ export const CartContex = createContext<ICartContex>({
   decreaseProductQuantity: () => {},
   increaseProductQuantity: () => {},
   removeProductFromCart: () => {},
+  clearCart: () => {},
 });
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
@@ -85,6 +87,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const totalDiscounts =
     subtotalPrice - totalPrice + Number(products[0]?.restaurant?.deliveryFee);
+
+  const clearCart = () => {
+    return setProducts([]);
+  };
 
   const decreaseProductQuantity = (productId: string) => {
     return setProducts((prev) =>
@@ -175,6 +181,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         totalPrice,
         totalDiscounts,
         totalQuantity,
+        clearCart,
         addProductToCart,
         decreaseProductQuantity,
         increaseProductQuantity,
