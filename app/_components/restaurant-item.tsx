@@ -13,11 +13,14 @@ interface RestaurantItemProps {
 const RestaurantItem = ({ restaurant, className }: RestaurantItemProps) => {
   return (
     <Link
-      className={cn("min-w-[266px] max-w-[266px]", className)}
+      className={cn(
+        "min-w-[266px] max-w-[266px] lg:min-w-[381px] lg:max-w-[381px]",
+        className,
+      )}
       href={`/restaurants/${restaurant.id}`}
     >
       <div className="w-full space-y-3">
-        <div className="relative h-[136px] w-full">
+        <div className="relative h-[136px] w-full lg:h-[165px]">
           <Image
             src={restaurant.imageUrl}
             fill
@@ -32,17 +35,19 @@ const RestaurantItem = ({ restaurant, className }: RestaurantItemProps) => {
 
           <Button
             size="icon"
-            className="absolute right-2 top-2 h-7 w-7 rounded-full bg-gray-700"
+            className="absolute right-2 top-2 h-7 w-7 rounded-full bg-gray-700 lg:h-9 lg:w-9"
           >
             <HeartIcon size={16} className="fill-white" />
           </Button>
         </div>
         <div>
-          <h3 className="text-sm font-semibold">{restaurant.name}</h3>
+          <h3 className="text-sm font-semibold lg:text-base">
+            {restaurant.name}
+          </h3>
           <div className="flex gap-3">
             <div className="flex items-center gap-1">
               <BikeIcon className="text-primary" size={12} />
-              <span className="text-xs text-muted-foreground">
+              <span className="text-xs text-muted-foreground lg:text-sm">
                 {Number(restaurant.deliveryFee) === 0
                   ? "Entrega grátis"
                   : formatCurrency(Number(restaurant.deliveryFee))}
@@ -51,7 +56,7 @@ const RestaurantItem = ({ restaurant, className }: RestaurantItemProps) => {
 
             <div className="flex items-center gap-1">
               <TimerIcon className="text-primary" size={12} />
-              <span className="text-xs text-muted-foreground">
+              <span className="text-xs text-muted-foreground lg:text-sm">
                 {restaurant.deliveryTimeMinutes} min
               </span>
             </div>
