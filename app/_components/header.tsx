@@ -27,8 +27,15 @@ const Header = () => {
   const handleSignInClick = () => signIn();
   return (
     <div className="flex items-center justify-between px-5 py-4 lg:container">
-      <Link href="/" className="relative h-[30px] w-[100px]">
-        <Image src="/logo.png" alt="FSW Foods" fill className="object-cover" />
+      <Link href="/">
+        <Image
+          src="/logo.png"
+          alt="FSW Foods"
+          width={0}
+          height={0}
+          sizes="100%"
+          className=" h-8 w-auto sm:h-10"
+        />
       </Link>
 
       <Sheet>
@@ -87,9 +94,12 @@ const Header = () => {
             <Button
               variant="ghost"
               className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+              asChild
             >
-              <HomeIcon size={18} />
-              <span className="block">Início</span>
+              <Link href="/">
+                <HomeIcon size={18} />
+                <span className="block">Início</span>
+              </Link>
             </Button>
 
             {data?.user && (
