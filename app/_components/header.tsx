@@ -26,7 +26,7 @@ const Header = () => {
   const handleSignOutClick = () => signOut();
   const handleSignInClick = () => signIn();
   return (
-    <div className="flex justify-between px-5 pt-6">
+    <div className="flex items-center justify-between px-5 py-4 lg:container">
       <Link href="/" className="relative h-[30px] w-[100px]">
         <Image src="/logo.png" alt="FSW Foods" fill className="object-cover" />
       </Link>
