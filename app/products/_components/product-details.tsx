@@ -97,12 +97,12 @@ const ProductDetails = ({
             <Image
               src={product.restaurant.imageUrl}
               alt={product.restaurant.name}
-              width={16}
-              height={16}
+              width={18}
+              height={18}
               className="rounded-full object-cover"
             />
           </div>
-          <span className="text-xs text-muted-foreground">
+          <span className="text-xs text-muted-foreground lg:text-sm">
             {product.restaurant.name}
           </span>
         </div>
@@ -151,14 +151,9 @@ const ProductDetails = ({
           <p className="text-sm text-muted-foreground">{product.description}</p>
         </div>
 
-        <div className="mt-6 space-y-3 px-5">
-          <h3 className="font-semibold">Sucos</h3>
-          <ProductList products={complementaryProducts} />
-        </div>
-
         <div className="mt-6 px-5">
           <Button
-            className="w-full font-semibold"
+            className="w-full font-semibold md:text-base"
             onClick={handleAddToCartClick}
           >
             Adicionar à sacola
@@ -192,7 +187,7 @@ const ProductDetails = ({
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction onClick={() => addToCart({ emptyCart: true })}>
-              Esvaziar sacola e adicionar
+              Confirmar
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
