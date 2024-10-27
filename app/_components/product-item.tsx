@@ -23,7 +23,7 @@ interface ProductItemProps {
 const ProductItem = ({ product, className }: ProductItemProps) => {
   return (
     <Link
-      className={cn("w-[150px] min-w-[150px]", className)}
+      className={cn("w-[150px] min-w-[150px] lg:w-48 lg:min-w-48", className)}
       href={`/products/${product.id}`}
     >
       <div className="w-full space-y-2">
@@ -32,6 +32,7 @@ const ProductItem = ({ product, className }: ProductItemProps) => {
             src={product.imageUrl}
             alt={product.name}
             fill
+            sizes="100%"
             className="rounded-lg object-cover shadow-md"
           />
 
@@ -46,18 +47,18 @@ const ProductItem = ({ product, className }: ProductItemProps) => {
         </div>
 
         <div>
-          <h2 className="truncate text-sm">{product.name}</h2>
+          <h2 className="truncate text-sm md:text-base">{product.name}</h2>
           <div className="flex items-center gap-1">
-            <h3 className="font-semibold">
+            <h3 className="font-semibold lg:text-base">
               {formatCurrency(calculateProductTotalPrice(product))}
             </h3>
             {product.discountPercentage > 0 && (
-              <span className="text-xs text-muted-foreground line-through">
+              <span className="text-xs text-muted-foreground line-through lg:text-sm">
                 {formatCurrency(Number(product.price))}
               </span>
             )}
           </div>
-          <span className="block text-xs text-muted-foreground">
+          <span className="block text-xs text-muted-foreground lg:text-sm">
             {product.restaurant.name}
           </span>
         </div>
