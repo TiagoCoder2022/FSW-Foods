@@ -20,8 +20,13 @@ import {
 } from "./ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
+import Search from "./search";
 
-const Header = () => {
+interface HeaderProps {
+  hasSearchbar: boolean;
+}
+
+const Header = ({ hasSearchbar }: HeaderProps) => {
   const { data, status } = useSession();
   const handleSignOutClick = () => signOut();
   const handleSignInClick = () => signIn();
@@ -37,6 +42,12 @@ const Header = () => {
           className=" h-8 w-auto sm:h-10"
         />
       </Link>
+
+      {hasSearchbar && (
+        <div className="hidden w-1/2 md:block">
+          <Search isHomePage={false} />
+        </div>
+      )}
 
       <Sheet>
         <SheetTrigger>
