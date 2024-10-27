@@ -6,7 +6,11 @@ import { Input } from "./ui/input";
 import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const Search = () => {
+interface SearchProps {
+  isHomePage: boolean;
+}
+
+const Search = ({ isHomePage }: SearchProps) => {
   const router = useRouter();
   const [search, setSearch] = useState("");
 
@@ -33,7 +37,15 @@ const Search = () => {
         value={search}
       />
 
-      <Button size="icon" type="submit" className="md:bg-[#FFB100]">
+      <Button
+        size="icon"
+        type="submit"
+        className={
+          isHomePage
+            ? "hover:opacity-65 md:bg-[#FFB100] md:hover:bg-amber-600 md:hover:opacity-60"
+            : "md:bg-[#EA1D2C] md:hover:opacity-70"
+        }
+      >
         <SearchIcon size={18} />
       </Button>
     </form>
