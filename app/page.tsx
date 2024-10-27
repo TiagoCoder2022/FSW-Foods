@@ -29,10 +29,10 @@ const Home = async () => {
 
   return (
     <>
-      <Header />
+      <Header hasSearchbar={false} />
 
       <div className="px-5 pt-6 md:hidden">
-        <Search />
+        <Search isHomePage={false} />
       </div>
 
       <div className="hidden items-center overflow-hidden md:flex md:h-[21.25rem] md:bg-[#EA1D2C] md:py-2 lg:h-[25.25rem]">
@@ -45,7 +45,7 @@ const Home = async () => {
             </p>
 
             <div className="md:rounded-md md:bg-white md:p-6">
-              <Search />
+              <Search isHomePage={true} />
             </div>
           </div>
 
