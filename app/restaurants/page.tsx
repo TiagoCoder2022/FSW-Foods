@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { searchForRestaurants } from "./_actions/search";
 import Header from "../_components/header";
 import RestaurantItem from "../_components/restaurant-item";
+import { Separator } from "../_components/ui/separator";
 
 const Restaurantes = () => {
   const searchParams = useSearchParams();
@@ -28,11 +29,14 @@ const Restaurantes = () => {
 
   return (
     <>
-      <Header />
-      <div className="px-5 py-6">
+      <Header hasSearchbar={true} />
+
+      <Separator className="hidden md:block" />
+
+      <div className="lg:px-22 px-5 py-6 md:px-20">
         <h2 className="mb-6 text-lg font-semibold">Restaurantes Encontrados</h2>
 
-        <div className="flex w-full flex-col gap-6">
+        <div className="flex w-full flex-col gap-6 lg:flex-row lg:flex-wrap lg:object-center">
           {restaurants.map((restaurant) => (
             <RestaurantItem
               key={restaurant.id}
