@@ -19,7 +19,9 @@ const CategoryItem = ({ category }: CategoryItemProps) => {
         width={30}
       />
 
-      <span className="lg:text-md text-sm font-semibold">{category.name}</span>
+      <span className="text-sm font-semibold lg:text-base">
+        {category.name}
+      </span>
     </Link>
   );
 };
