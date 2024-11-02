@@ -46,7 +46,7 @@ const ProductPage = async ({ params: { id } }: ProductPageProps) => {
 
       <Separator className="hidden md:block" />
 
-      <div>
+      <div className="lg:container">
         <div className="flex flex-col gap-4 p-0 lg:container md:flex-row md:gap-10 md:p-5 md:px-10">
           <div className="w-full rounded-lg md:w-3/6 ">
             <ProductImage product={product} />
