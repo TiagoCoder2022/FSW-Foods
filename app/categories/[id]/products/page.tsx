@@ -35,7 +35,9 @@ const CategoriesPage = async ({ params: { id } }: CategoriesPageProps) => {
   return (
     <>
       <Header hasSearchbar={true} />
-      <Separator />
+
+      <Separator className="hidden md:block" />
+
       <div className="px-5 py-6 md:px-20 lg:px-32">
         <h2 className="mb-6 text-lg font-semibold lg:text-xl">
           {category.name}

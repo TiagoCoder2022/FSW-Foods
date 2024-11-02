@@ -5,6 +5,7 @@ import { authOptions } from "../_lib/auth";
 import { notFound } from "next/navigation";
 import Header from "../_components/header";
 import RestaurantItem from "../_components/restaurant-item";
+import { Separator } from "../_components/ui/separator";
 
 const MyFavoriteRestaurants = async () => {
   const session = await getServerSession(authOptions);
@@ -23,12 +24,15 @@ const MyFavoriteRestaurants = async () => {
   return (
     <>
       <Header hasSearchbar={true} />
-      <div className="px-5 py-6">
+
+      <Separator className="hidden md:block" />
+
+      <div className="lg:px-30 px-5 py-6 md:px-20">
         <h2 className="mb-6 text-lg font-semibold">
           Meus Restaurants Favoritos
         </h2>
 
-        <div className="flex w-full flex-col gap-6">
+        <div className="grid grid-cols-2 gap-6 lg:flex lg:flex-row lg:flex-wrap lg:object-center">
           {userFavoriteRestaurants.length > 0 ? (
             userFavoriteRestaurants.map(({ restaurant }) => (
               <RestaurantItem
