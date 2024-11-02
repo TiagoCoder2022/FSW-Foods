@@ -72,13 +72,14 @@ model Restaurant {
   usersWhoFavorited   UserFavoriteRestaurants[]
 }
 
-model UserFavoriteRestaurants {
-  id           String     @id @default(uuid())
+model UserFavoriteRestaurants { 
   userId       String
   user         User       @relation(fields: [userId], references: [id])
   restaurantId String
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   createdAt    DateTime   @default(now())
+
+  @@id([userId, restaurantId])
 }
 
 model Category {
