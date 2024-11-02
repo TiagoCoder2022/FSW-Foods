@@ -1,13 +1,20 @@
 "use client";
-import Header from "@/app/_components/header";
-import RestaurantItem from "@/app/_components/restaurant-item";
-import { Restaurant } from "@prisma/client";
-import { Separator } from "@radix-ui/react-separator";
+
 import { notFound, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { searchForRestaurants } from "../_actions/search";
+import { Restaurant, UserFavoriteRestaurants } from "@prisma/client";
+import { searchForRestaurants } from "@/app/restaurants/_actions/search";
+import Header from "@/app/_components/header";
+import RestaurantItem from "@/app/_components/restaurant-item";
+import { Button } from "@/app/_components/ui/button";
+import Link from "next/link";
+import { ChevronLeftIcon } from "lucide-react";
 
-const Restaurants = () => {
+interface RestaurantProps {
+  userFavoriteRestaurants: UserFavoriteRestaurants[];
+}
+
+const Restaurants = ({ userFavoriteRestaurants }: RestaurantProps) => {
   const searchParams = useSearchParams();
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
 
@@ -16,10 +23,10 @@ const Restaurants = () => {
   useEffect(() => {
     const fetchRestaurants = async () => {
       if (!searchFor) return;
+
       const foundRestaurants = await searchForRestaurants(searchFor);
       setRestaurants(foundRestaurants);
     };
-
     fetchRestaurants();
   }, [searchFor]);
 
@@ -30,18 +37,33 @@ const Restaurants = () => {
   return (
     <>
       <Header hasSearchbar={true} />
+      <div className="px-5 py-6">
+        <div className="mb-6 inline-flex items-center  justify-center">
+          <div className="hidden md:block">
+            <Button
+              className=" rounded-full 
+            border border-solid border-muted-foreground bg-[#F4F4F4]  text-foreground shadow-sm"
+              size="icon"
+              asChild
+            >
+              <Link href="/">
+                <ChevronLeftIcon />
+              </Link>
+            </Button>
+          </div>
 
-      <Separator className="hidden md:block" />
+          <h2 className="pl-0 text-lg font-semibold md:pl-4 ">
+            Restaurantes Encontrados
+          </h2>
+        </div>
 
-      <div className="lg:px-22 px-5 py-6 md:px-20">
-        <h2 className="mb-6 text-lg font-semibold">Restaurantes Encontrados</h2>
-
-        <div className="flex w-full flex-col gap-6 lg:flex-row lg:flex-wrap lg:object-center">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {restaurants.map((restaurant) => (
             <RestaurantItem
               key={restaurant.id}
               restaurant={restaurant}
-              className="min-w-full max-w-full"
+              className="min-w-full"
+              userFavoriteRestaurants={userFavoriteRestaurants}
             />
           ))}
         </div>
