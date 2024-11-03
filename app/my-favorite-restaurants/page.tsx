@@ -29,7 +29,7 @@ const MyFavoriteRestaurants = async () => {
 
       <div className="lg:px-30 px-5 py-6 md:px-20">
         <h2 className="mb-6 text-lg font-semibold">
-          Meus Restaurants Favoritos
+          Meus Restaurantes Favoritos
         </h2>
 
         <div className="grid grid-cols-2 gap-6 lg:flex lg:flex-row lg:flex-wrap lg:object-center">
