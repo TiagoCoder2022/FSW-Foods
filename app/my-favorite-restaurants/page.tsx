@@ -32,7 +32,7 @@ const MyFavoriteRestaurants = async () => {
           Meus Restaurantes Favoritos
         </h2>
 
-        <div className="grid grid-cols-2 gap-6 lg:flex lg:flex-row lg:flex-wrap lg:object-center">
+        <div className="grid grid-cols-2 gap-5 lg:flex lg:flex-row lg:flex-wrap lg:object-center">
           {userFavoriteRestaurants.length > 0 ? (
             userFavoriteRestaurants.map(({ restaurant }) => (
               <RestaurantItem

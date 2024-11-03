@@ -9,6 +9,7 @@ import RestaurantItem from "@/app/_components/restaurant-item";
 import { Button } from "@/app/_components/ui/button";
 import Link from "next/link";
 import { ChevronLeftIcon } from "lucide-react";
+import { Separator } from "@/app/_components/ui/separator";
 
 interface RestaurantProps {
   userFavoriteRestaurants: UserFavoriteRestaurants[];
@@ -37,7 +38,10 @@ const Restaurants = ({ userFavoriteRestaurants }: RestaurantProps) => {
   return (
     <>
       <Header hasSearchbar={true} />
-      <div className="px-5 py-6">
+
+      <Separator className="hidden md:block" />
+
+      <div className="lg:px-30 px-5 py-6 md:px-20">
         <div className="mb-6 inline-flex items-center  justify-center">
           <div className="hidden md:block">
             <Button
@@ -57,7 +61,7 @@ const Restaurants = ({ userFavoriteRestaurants }: RestaurantProps) => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+        <div className="grid grid-cols-2 gap-5 lg:flex lg:flex-row lg:flex-wrap lg:object-center">
           {restaurants.map((restaurant) => (
             <RestaurantItem
               key={restaurant.id}
