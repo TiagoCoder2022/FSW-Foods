@@ -23,22 +23,24 @@
 - **Favorite Restautants**: You can save your favorite restaurants.
 
 - **Redo a order**: On your orders you can redo a order.
+ 
+- **Full Responsiveness**: Works perfectly on both desktop and mobile.
 
 ## Technologies Used 🚀
 
-- **React**: A popular JavaScript library for building interactive user interfaces.
+💻 **React**: A popular JavaScript library for building interactive user interfaces.
 
-- **Next.js 13**: A React framework that offers server-side rendering (SSR), static generation (SSG), among many other features.
+🌐 **Next.js 13**: A React framework that offers server-side rendering (SSR), static generation (SSG), among many other features.
 
-- **Next Auth**: Library for authenticating users with OAuth.
+🔑 **Next Auth**: Library for authenticating users with OAuth.
 
-- **Postgres**: A relational database management system.
+📊 **Postgres**: A relational database management system.
 
-- **Prisma**: An ORM (Object-Relational Mapping) for Node.js and TypeScript.
+🛠️ **Prisma**: An ORM (Object-Relational Mapping) for Node.js and TypeScript.
 
-- **shadcn/ui**: A library of reusable and styleable UI components.
+🎨 **shadcn/ui**: A library of reusable and styleable UI components.
 
-- **Tailwind CSS**: A CSS framework that offers several pre-styled classes for use.
+🎨 **Tailwind CSS**: A CSS framework that offers several pre-styled classes for use.
 
 ## Contributing
 
