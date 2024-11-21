@@ -5,7 +5,7 @@
 <p align="center">
     This is an IFood clone app
     <br />
-    <a href="https://fsw-foods-chi.vercel.app" target"_blank" ><strong>Check out the app »</strong></a>
+    <a href="https://fsw-foods-chi.vercel.app" target="_blank"><strong>Check out the app »</strong></a>
     <br />    
 </p>
 
