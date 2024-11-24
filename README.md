@@ -30,7 +30,7 @@
 
 💻 **React**: A popular JavaScript library for building interactive user interfaces.
 
-🌐 **Next.js 13**: A React framework that offers server-side rendering (SSR), static generation (SSG), among many other features.
+🌐 **Next.js 14**: A React framework that offers server-side rendering (SSR), static generation (SSG), among many other features.
 
 🔑 **Next Auth**: Library for authenticating users with OAuth.
 
