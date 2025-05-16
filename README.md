@@ -20,7 +20,7 @@
 
 - **Shopping Cart Management**: Users can add products to their shopping cart, remove products and also modify the quantity of a product in the shopping cart as needed.
 
-- **Favorite Restautants**: You can save your favorite restaurants.
+- **Favorite Restaurants**: You can save your favorite restaurants.
 
 - **Redo a order**: On your orders you can redo a order.
  
